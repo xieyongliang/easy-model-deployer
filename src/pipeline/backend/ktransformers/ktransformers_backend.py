@@ -7,8 +7,7 @@ import threading
 
 logger = get_logger(__name__)
 
-
-class KTransformersCppBackend(OpenAICompitableProxyBackendBase):
+class KTransformersBackend(OpenAICompitableProxyBackendBase):
     server_port = "10002"
 
     def find_gguf_file(self,model_path):
@@ -48,18 +47,9 @@ class KTransformersCppBackend(OpenAICompitableProxyBackendBase):
         else:
             raise ValueError(f"Unsupported instance type!")
 
-        cpu_infer = None
-        if self.instance_type.contains('24xlarge'):
-            cpu_infer = 94 
-        elif self.instance_type.contains('16xlarge') or self.instance_type.contains('12xlarge'):
-            cpu_infer = 62
-        elif self.instance_type.contains('8xlarge'):
-            cpu_infer = 30
-        else:
-            raise ValueError(f"Unsupported instance type!")
+        cpu_infer = self.cpu_num - 2
 
-        max_new_tokens = 2048
-        serve_command = f'TORCH_CUDA_ARCH_LIST={TORCH_CUDA_ARCH_LIST} python /opt/ml/code/ktransformers/ktransformers/server/main.py  --model_path /opt/ml/model/DeepSeek-R1  --gguf_path {gguf_model_path} --port {self.server_port} --cpu_infer {cpu_infer} --max_new_tokens {max_new_tokens}'
+        serve_command = f'TORCH_CUDA_ARCH_LIST={TORCH_CUDA_ARCH_LIST} python /opt/ml/code/ktransformers/ktransformers/server/main.py  --model_path /opt/ml/model/DeepSeek-R1  --gguf_path {gguf_model_path} --port {self.server_port} --cpu_infer {cpu_infer}'
         if self.environment_variables:
             serve_command = f'{self.environment_variables} && {serve_command}'
         return serve_command

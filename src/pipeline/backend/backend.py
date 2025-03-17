@@ -16,7 +16,7 @@ import threading
 # import httpx
 from emd.models.utils.constants import ModelType,ServiceType
 from emd.models import Engine
-from emd.utils.accelerator_utils import get_gpu_num,get_neuron_core_num
+from emd.utils.accelerator_utils import get_gpu_num,get_neuron_core_num,get_cpu_num
 
 
 from utils.common import download_dir_from_s3_by_s5cmd
@@ -79,6 +79,10 @@ class OpenAICompitableProxyBackendBase(BackendBase):
         if self.custom_gpu_num is not None:
             return self.custom_gpu_num
         return get_gpu_num()
+    
+    @property
+    def cpu_num(self):
+        return get_cpu_num()
 
     @property
     def neuron_core_num(self):
