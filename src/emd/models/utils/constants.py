@@ -62,6 +62,15 @@ class InstanceType(ConstantBase):
     G5d4XLARGE = "g5.4xlarge"
     G5d8XLARGE = "g5.8xlarge"
 
+    G6d48XLARGE = "g6.48xlarge"
+    G6d24XLARGE = "g6.24xlarge"
+    G6d12XLARGE = "g6.12xlarge"
+    G6d16XLARGE = "g6.16xlarge"
+    G6d2XLARGE = "g6.2xlarge"
+    G6dXLARGE = "g6.xlarge"
+    G6d4XLARGE = "g6.4xlarge"
+    G6d8XLARGE = "g6.8xlarge"
+
     G6eXLARGE = "g6e.xlarge"
     G6e2XLARGE = "g6e.2xlarge"
     G6e4XLARGE = "g6e.4xlarge"
