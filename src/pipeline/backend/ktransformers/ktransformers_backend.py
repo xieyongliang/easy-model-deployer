@@ -40,9 +40,9 @@ class KTransformersBackend(OpenAICompitableProxyBackendBase):
         gguf_model_path = self.find_gguf_file(model_path)
 
         TORCH_CUDA_ARCH_LIST = None
-        if self.instance_type.contains('g5'):
+        if 'g5' in self.instance_type:
             TORCH_CUDA_ARCH_LIST = '8.6'
-        elif self.instance_type.contains('g6'):
+        elif 'g6' in self.instance_type:
             TORCH_CUDA_ARCH_LIST = '8.9'
         else:
             raise ValueError(f"Unsupported instance type!")
