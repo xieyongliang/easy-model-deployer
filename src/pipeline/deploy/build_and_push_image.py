@@ -164,7 +164,7 @@ def run(
         framework_f.write("\n")
         framework_f.write("COPY s5cmd /app/s5cmd")
         framework_f.write("\n")
-        framework_f.write("RUN . ~/.bashrc && python3 -m pip install -r requirements.txt")
+        framework_f.write("RUN python3 -m pip install -r requirements.txt")
         framework_f.write("\n")
         if (
             execute_model.executable_config.current_framework.framework_type
@@ -174,7 +174,7 @@ def run(
             fastapi_serve_command = (
                 f"export AWS_DEFAULT_REGION={region} && "
                 f"export PYTHONPATH=.:$PYTHONPATH && "
-                f"source ~/.bashrc && python3 fast_api.py"
+                f"python3 fast_api.py"
                 f" --backend_type={backend_type}"
                 f" --model_id={model_id}"
                 f" --region={region}"
