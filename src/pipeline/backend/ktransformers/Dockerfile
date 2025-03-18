@@ -22,7 +22,7 @@ RUN curl https://github.com/peak/s5cmd/releases/download/v2.0.0/s5cmd_2.0.0_Linu
 RUN mkdir -p /tmp/s5cmd && tar -xvf /tmp/s5cmd.tar.gz -C /tmp/s5cmd
 RUN cp /tmp/s5cmd/s5cmd /opt/ml/code
 
-COPY backend/ktransformers/DeepSeek-R1/ /opt/ml/model/DeepSeek-R1c
+COPY backend/ktransformers/DeepSeek-R1/ /opt/ml/model/DeepSeek-R1
 
 # Ensure the serve script has executable permissions
 # RUN chmod +x /usr/bin/serve
