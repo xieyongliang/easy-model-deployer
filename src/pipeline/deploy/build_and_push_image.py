@@ -174,7 +174,7 @@ def run(
             fastapi_serve_command = (
                 f"export AWS_DEFAULT_REGION={region} && "
                 f"export PYTHONPATH=.:$PYTHONPATH && "
-                f"python3 fast_api.py"
+                f"source ~/.bashrc && python3 fast_api.py"
                 f" --backend_type={backend_type}"
                 f" --model_id={model_id}"
                 f" --region={region}"
