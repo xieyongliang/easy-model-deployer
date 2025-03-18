@@ -43,7 +43,7 @@ class HuggingFaceLLMEngine(Engine):
 class ComfyuiEngine(Engine):
     pass
 
-class KtransformersEngine(Engine):
+class KtransformersEngine(OpenAICompitableEngine):
     pass
 
 vllm_engine064 = VllmEngine(**{
