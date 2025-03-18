@@ -20,11 +20,11 @@ RUN curl https://github.com/peak/s5cmd/releases/download/v2.0.0/s5cmd_2.0.0_Linu
 RUN mkdir -p /tmp/s5cmd && tar -xvf /tmp/s5cmd.tar.gz -C /tmp/s5cmd
 RUN cp /tmp/s5cmd/s5cmd /opt/ml/code
 
-COPY DeepSeek-R1/ /opt/ml/model/DeepSeek-R1
+COPY backend/ktransformers/DeepSeek-R1/ /opt/ml/model/DeepSeek-R1c
 
 # Ensure the serve script has executable permissions
 # RUN chmod +x /usr/bin/serve
-RUN pip install boto3 fastapi uvicorn requests openai hf_transfer modelscope
+RUN . ~/.bashrc && pip install boto3 fastapi uvicorn requests openai hf_transfer modelscope
 
 # Expose port 8080
 EXPOSE 8080
