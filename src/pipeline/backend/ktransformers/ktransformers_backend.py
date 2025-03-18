@@ -54,39 +54,10 @@ class KTransformersBackend(OpenAICompitableProxyBackendBase):
             serve_command = f'{self.environment_variables} && {serve_command}'
         return serve_command
 
-    def check_model_serve_ready(self,thread:threading.Thread,host,port):
-        import openai
-        while True:
-            try:
-                for m in self.client.models.list():
-                    if self.model_id in m.id:
-                        return
-                logger.info(f"model: {self.model_id} starting...")
-                time.sleep(5)
-            except (openai.NotFoundError,openai.InternalServerError,openai.APIConnectionError) as e:
-                logger.info(f"model: {self.model_id} error: {str(e)}, starting...")
-                time.sleep(5)
-
     def invoke(self, request):
         # Transform input to lmdeploy format
         request = self._transform_request(request)
-        # Invoke lmdeploy
         logger.info(f"Chat request:{request}")
-        # if self.model_type == ModelType.EMBEDDING:
-        #     # print('cal embedding....')
-        #     response = self.client.embeddings.create(**request)
-        #     # print('end cal embedding....')
-        # elif self.model_type == ModelType.RERANK:
-        #     headers = {
-        #         "accept": "application/json",
-        #         "Accept-Type": "application/json",
-        #     }
-        #     response = httpx.post(
-        #         f'http://localhost:{self.server_port}/v1/score',
-        #         json=request,
-        #         headers=headers
-        #     ).json()
-        # else:
         response = self.client.chat.completions.create(**request)
         logger.info(f"response:{response}")
         if request.get('stream',False):
