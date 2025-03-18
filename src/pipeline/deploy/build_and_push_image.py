@@ -164,7 +164,7 @@ def run(
         framework_f.write("\n")
         framework_f.write("COPY s5cmd /app/s5cmd")
         framework_f.write("\n")
-        framework_f.write("RUN python3 -m pip install -r requirements.txt")
+        framework_f.write("RUN . ~/.bashrc && python3 -m pip install -r requirements.txt")
         framework_f.write("\n")
         if (
             execute_model.executable_config.current_framework.framework_type
