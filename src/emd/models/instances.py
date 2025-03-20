@@ -147,7 +147,7 @@ g6d4xlarge_instance = Instance(
     vcpu=16,
     memory=64,
     description="Amazon EC2 G5 instances are powered by the latest generation of Amazon GPU-optimized processors, the AWS Graviton5 processors.",
-    support_cn_region=TFalserue
+    support_cn_region=False
 )
 g6d8xlarge_instance = Instance(
     instance_type=InstanceType.G6d8XLARGE,
