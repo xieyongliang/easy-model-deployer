@@ -131,7 +131,7 @@ g6dxlarge_instance = Instance(
     vcpu=4,
     memory=16,
     description="Amazon EC2 G5 instances are powered by the latest generation of Amazon GPU-optimized processors, the AWS Graviton5 processors.",
-    support_cn_region=True
+    support_cn_region=False
 )
 g6d2xlarge_instance = Instance(
     instance_type=InstanceType.G6d2XLARGE,
@@ -139,7 +139,7 @@ g6d2xlarge_instance = Instance(
     vcpu=8,
     memory=32,
     description="Amazon EC2 G5 instances are powered by the latest generation of Amazon GPU-optimized processors, the AWS Graviton5 processors.",
-    support_cn_region=True
+    support_cn_region=False
 )
 g6d4xlarge_instance = Instance(
     instance_type=InstanceType.G6d4XLARGE,
@@ -147,7 +147,7 @@ g6d4xlarge_instance = Instance(
     vcpu=16,
     memory=64,
     description="Amazon EC2 G5 instances are powered by the latest generation of Amazon GPU-optimized processors, the AWS Graviton5 processors.",
-    support_cn_region=True
+    support_cn_region=TFalserue
 )
 g6d8xlarge_instance = Instance(
     instance_type=InstanceType.G6d8XLARGE,
@@ -155,7 +155,7 @@ g6d8xlarge_instance = Instance(
     vcpu=32,
     memory=128,
     description="Amazon EC2 G5 instances are powered by the latest generation of Amazon GPU-optimized processors, the AWS Graviton5 processors.",
-    support_cn_region=True
+    support_cn_region=False
 )
 
 g6d12xlarge_instance = Instance(
@@ -164,7 +164,7 @@ g6d12xlarge_instance = Instance(
     vcpu=48,
     memory=192,
     description="Amazon EC2 G5 instances are powered by the latest generation of Amazon GPU-optimized processors, the AWS Graviton5 processors.",
-    support_cn_region=True
+    support_cn_region=False
 )
 g6d16xlarge_instance = Instance(
     instance_type=InstanceType.G6d16XLARGE,
@@ -172,7 +172,7 @@ g6d16xlarge_instance = Instance(
     vcpu=64,
     memory=256,
     description="Amazon EC2 G5 instances are powered by the latest generation of Amazon GPU-optimized processors, the AWS Graviton5 processors.",
-    support_cn_region=True
+    support_cn_region=False
 )
 g6d24xlarge_instance = Instance(
     instance_type=InstanceType.G6d24XLARGE,
@@ -180,7 +180,7 @@ g6d24xlarge_instance = Instance(
     vcpu=96,
     memory=384,
     description="Amazon EC2 G5 instances are powered by the latest generation of Amazon GPU-optimized processors, the AWS Graviton5 processors.",
-    support_cn_region=True
+    support_cn_region=False
 )
 
 g6d48xlarge_instance = Instance(
@@ -189,7 +189,7 @@ g6d48xlarge_instance = Instance(
     memory=768,
     instance_type=InstanceType.G6d48XLARGE,
     description="Amazon EC2 G5 instances are powered by the latest generation of Amazon GPU-optimized processors, the AWS Graviton5 processors.",
-    support_cn_region=True
+    support_cn_region=False
 )
 
 g6exlarge_instance = Instance(
