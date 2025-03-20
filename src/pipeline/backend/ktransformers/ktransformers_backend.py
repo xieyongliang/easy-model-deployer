@@ -9,7 +9,7 @@ class KTransformersBackend(OpenAICompitableProxyBackendBase):
     server_port = "10002"
 
     def get_gguf_path(self, folder_path):
-        patterns = ["*UD-IQ1_S*", "*UD-Q2_K_XL*", "*Q4_K_M*"]
+        patterns = [r".*UD-IQ1_S.*", r".*UD-Q2_K_XL.*", r".*Q4_K_M.*"]
 
         regexes = [re.compile(pattern) for pattern in patterns]
 
