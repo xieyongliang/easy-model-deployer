@@ -1,10 +1,31 @@
 from backend.backend import OpenAICompitableProxyBackendBase
 from emd.utils.logger_utils import get_logger
+import os
+import re
 
 logger = get_logger(__name__)
 
 class KTransformersBackend(OpenAICompitableProxyBackendBase):
     server_port = "10002"
+
+    def get_gguf_path(self, folder_path):
+        patterns = ["*UD-IQ1_S*", "*UD-Q2_K_XL*", "*Q4_K_M*"]
+
+        regexes = [re.compile(pattern) for pattern in patterns]
+
+        default_subfolder_path = None
+
+        for subfolder_name in os.listdir(folder_path):
+            subfolder_path = os.path.join(folder_path, subfolder_name)
+            if default_subfolder_path is None:
+                default_subfolder_path = subfolder_path
+
+            if os.path.isdir(subfolder_path):
+                for regex in regexes:
+                    if regex.match(subfolder_name):
+                        return subfolder_path
+
+        return default_subfolder_path
 
     def format_devices(self):
         return ",".join([f"CUDA{i}" for i in range(self.gpu_num)])
@@ -20,8 +41,9 @@ class KTransformersBackend(OpenAICompitableProxyBackendBase):
             raise ValueError(f"Unsupported instance type!")
 
         cpu_infer = self.cpu_num - 2
+        gguf_path = self.get_gguf_path(model_path)
 
-        serve_command = f'TORCH_CUDA_ARCH_LIST={TORCH_CUDA_ARCH_LIST} python /opt/ml/code/ktransformers/ktransformers/server/main.py  --model_path /opt/ml/model/DeepSeek-R1  --gguf_path {model_path} --port {self.server_port} --cpu_infer {cpu_infer}'
+        serve_command = f'TORCH_CUDA_ARCH_LIST={TORCH_CUDA_ARCH_LIST} python /opt/ml/code/ktransformers/ktransformers/server/main.py  --model_path /opt/ml/model/DeepSeek-R1  --gguf_path {gguf_path} --port {self.server_port} --cpu_infer {cpu_infer}'
         if self.environment_variables:
             serve_command = f'{self.environment_variables} && {serve_command}'
         return serve_command
