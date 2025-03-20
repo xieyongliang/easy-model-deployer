@@ -15,15 +15,16 @@ class KTransformersBackend(OpenAICompitableProxyBackendBase):
 
         default_subfolder_path = None
 
+        print("folder_path: ", folder_path)
         for subfolder_name in os.listdir(folder_path):
+            print("subfolder_name: ", subfolder_name)
             subfolder_path = os.path.join(folder_path, subfolder_name)
+            print("subfolder_path: ", subfolder_path)
             if default_subfolder_path is None:
                 default_subfolder_path = subfolder_path
 
             if os.path.isdir(subfolder_path):
-                print(subfolder_path)
-                os.system('pwd')
-                os.system('ls -l')
+                os.system(f'ls -l {subfolder_path}')
                 for regex in regexes:
                     if regex.match(subfolder_name):
                         return subfolder_path
