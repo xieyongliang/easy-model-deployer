@@ -15,11 +15,11 @@ class KTransformersBackend(OpenAICompitableProxyBackendBase):
 
         default_subfolder_path = None
 
-        print("folder_path: ", folder_path)
+        logger.info(f"folder_path: {folder_path}")
         for subfolder_name in os.listdir(folder_path):
-            print("subfolder_name: ", subfolder_name)
+            logger.info(f"subfolder_name: {subfolder_name}")
             subfolder_path = os.path.join(folder_path, subfolder_name)
-            print("subfolder_path: ", subfolder_path)
+            logger.info(f"subfolder_path: {subfolder_path}")
             if default_subfolder_path is None:
                 default_subfolder_path = subfolder_path
 
