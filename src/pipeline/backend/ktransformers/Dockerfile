@@ -15,6 +15,7 @@ RUN pip install packaging ninja cpufeature numpy
 RUN pip install flash-attn==2.7.4.post1 --no-build-isolation
 RUN pip install flashinfer-python==0.2.3
 RUN mkdir -p /opt/ml/code
+RUN mkdir -p /opt/ml/code/emd_models
 RUN git clone https://github.com/kvcache-ai/ktransformers.git /opt/ml/code/ktransformers
 RUN cd /opt/ml/code/ktransformers && git submodule init && git submodule update && bash install.sh
 
