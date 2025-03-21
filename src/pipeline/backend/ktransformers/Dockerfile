@@ -19,7 +19,7 @@ RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && pip install torch tor
 RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && pip install packaging ninja cpufeature numpy wheel openai"
 RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && pip install flash-attn==2.7.4.post1 --no-build-isolation"
 RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && pip install flashinfer-python==0.2.3"
-RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && cd /opt/ml/code/ktransformers && git submodule init && git submodule update && chmod +x install.sh && ./install.sh"
+RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && cd /opt/ml/code/ktransformers && git submodule init && git submodule update && CPU_INSTRUCT=NATIVE KTRANSFORMERS_FORCE_BUILD=TRUE TORCH_CUDA_ARCH_LIST=8.6;8.9' pip install . --no-build-isolation --verbose"
 
 RUN curl https://github.com/peak/s5cmd/releases/download/v2.0.0/s5cmd_2.0.0_Linux-64bit.tar.gz -L -o /tmp/s5cmd.tar.gz
 RUN mkdir -p /tmp/s5cmd && tar -xvf /tmp/s5cmd.tar.gz -C /tmp/s5cmd
