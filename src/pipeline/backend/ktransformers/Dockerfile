@@ -13,7 +13,7 @@ RUN mkdir -p /opt/ml/code
 RUN mkdir -p /opt/ml/code/emd_models
 RUN git clone https://github.com/kvcache-ai/ktransformers.git /opt/ml/code/ktransformers
 
-RUN conda create --name ktransformers python=3.11
+RUN conda create --name ktransformers python=3.11 && conda init
 RUN conda install -c conda-forge libstdcxx-ng
 RUN /bin/bash -c "conda activate ktransformers && pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126"
 RUN /bin/bash -c "conda activate ktransformers && pip install packaging ninja cpufeature numpy"
