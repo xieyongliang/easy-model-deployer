@@ -47,7 +47,7 @@ class KTransformersBackend(OpenAICompitableProxyBackendBase):
         cpu_infer = self.cpu_num - 2
         gguf_path = self.get_gguf_path(model_path)
 
-        serve_command = f'bash -c "source /opt/ml/code/venv/bin/activate && TORCH_CUDA_ARCH_LIST={TORCH_CUDA_ARCH_LIST} python /opt/ml/code/ktransformers/ktransformers/server/main.py  --model_path /opt/ml/model/DeepSeek-R1  --gguf_path {gguf_path} --port {self.server_port} --cpu_infer {cpu_infer}"'
+        serve_command = f'bash -c "source /opt/ml/code/venv/bin/activate && pip install openai && TORCH_CUDA_ARCH_LIST={TORCH_CUDA_ARCH_LIST} python /opt/ml/code/ktransformers/ktransformers/server/main.py  --model_path /opt/ml/model/DeepSeek-R1  --gguf_path {gguf_path} --port {self.server_port} --cpu_infer {cpu_infer}"'
         if self.environment_variables:
             serve_command = f'{self.environment_variables} && {serve_command}'
         return serve_command
