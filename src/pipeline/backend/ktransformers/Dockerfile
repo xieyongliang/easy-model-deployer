@@ -16,7 +16,7 @@ RUN git clone https://github.com/kvcache-ai/ktransformers.git /opt/ml/code/ktran
 RUN conda install -c conda-forge libstdcxx-ng
 RUN python -m venv /opt/ml/code/venv
 RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && pip install torch torchvision torchaudio --index-url https://download.pytorch.org/whl/cu126"
-RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && pip install packaging ninja cpufeature numpy wheel"
+RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && pip install packaging ninja cpufeature numpy wheel openai"
 RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && pip install flash-attn==2.7.4.post1 --no-build-isolation"
 RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && pip install flashinfer-python==0.2.3"
 RUN /bin/bash -c "source /opt/ml/code/venv/bin/activate && cd /opt/ml/code/ktransformers && git submodule init && git submodule update && chmod +x install.sh && ./install.sh"
