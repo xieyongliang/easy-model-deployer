@@ -6,7 +6,7 @@ ENV TORCH_CUDA_ARCH_LIST="8.6 8.9"
 
 RUN apt-get update && apt-get upgrade -y && apt-get install git cmake curl -y
 RUN curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -L -o /tmp/Miniconda3-latest-Linux-x86_64.sh
-RUN bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p ~/miniconda3 && conda init
+RUN bash /tmp/Miniconda3-latest-Linux-x86_64.sh -b -p ~/miniconda3
 ENV PATH="/root/miniconda3/bin:${PATH}"
 
 RUN mkdir -p /opt/ml/code
