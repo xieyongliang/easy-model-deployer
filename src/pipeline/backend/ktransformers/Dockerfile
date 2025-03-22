@@ -2,7 +2,7 @@ ARG CUDA_IMAGE="12.5.0-devel-ubuntu22.04"
 FROM nvcr.io/nvidia/cuda:${CUDA_IMAGE}
 
 ENV CUDA_HOME=/usr/local/cuda
-ENV TORCH_CUDA_ARCH_LIST="8.6;8.9"
+ENV TORCH_CUDA_ARCH_LIST='8.6;8.9'
 
 RUN apt-get update && apt-get upgrade -y && apt-get install git cmake curl -y
 RUN curl https://repo.anaconda.com/miniconda/Miniconda3-latest-Linux-x86_64.sh -L -o /tmp/Miniconda3-latest-Linux-x86_64.sh
