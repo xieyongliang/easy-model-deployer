@@ -180,6 +180,13 @@ class ServiceQuotaCode(ConstantBase):
             InstanceType.G5d16XLARGE: cls.G5d16XLARGE_ENDPOINT,
             InstanceType.G5d24XLARGE: cls.G5d24XLARGE_ENDPOINT,
             InstanceType.G5d48XLARGE: cls.G5d48XLARGE_ENDPOINT,
+
+            InstanceType.G6d8XLARGE: "L-B0F91871",
+            InstanceType.G6d12XLARGE: "L-0A29AACF",
+            InstanceType.G6d16XLARGE: "L-913947FA",
+            InstanceType.G6d24XLARGE: "L-6A3E5D65",
+            InstanceType.G6d48XLARGE: "L-28FEB563",
+
             InstanceType.G6eXLARGE: "G6e2XLARGE",
             InstanceType.G6e2XLARGE: cls.G6e2XLARGE_ENDPOINT,
             InstanceType.G6e4XLARGE: "L-93531071",
