@@ -121,7 +121,8 @@ class InstanceType(ConstantBase):
             raise NotImplementedError(service)
 
 class ServiceType(ConstantBase):
-    SAGEMAKER = "sagemaker"
+    SAGEMAKER_OLDER = "sagemaker"
+    SAGEMAKER = "sagemaker_realtime"
     SAGEMAKER_ASYNC = "sagemaker_async"
     EC2 = "ec2"
     ECS = "ecs"
@@ -209,6 +210,7 @@ class ServiceQuotaCode(ConstantBase):
 
 
 class ModelSeriesType(ConstantBase):
+    GEMMA3 = "gemma3"
     QWEN2D5 = "qwen2.5"
     GLM4 = "glm4"
     INTERLM2d5 = "internlm2.5"

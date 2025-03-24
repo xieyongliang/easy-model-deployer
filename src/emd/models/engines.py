@@ -54,22 +54,30 @@ vllm_engine064 = VllmEngine(**{
             "use_public_ecr":True,
             "docker_login_region":"us-east-1",
             "default_cli_args": " --max_num_seq 10",
-            "environment_variables": "export VLLM_ATTENTION_BACKEND=FLASHINFER && export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True"
+            # "environment_variables": "export VLLM_ATTENTION_BACKEND=FLASHINFER && export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True"
 }
 )
 
 vllm_qwen2d5_engine064 = VllmEngine(**{
-             **vllm_engine064.model_dump(),
+            **vllm_engine064.model_dump(),
             "default_cli_args": " --chat-template emd/models/chat_templates/qwen_2d5_add_prefill_chat_template.jinja --max_model_len 16000 --disable-log-stats --enable-auto-tool-choice --tool-call-parser hermes"
 })
 
 
-
+vllm_gemma3_engine = VllmEngine(
+    **{
+    **vllm_engine064.model_dump(),
+    "engine_dockerfile_config": {"VERSION":"v7.4.0_gemma3"},
+    "dockerfile_name":"Dockerfile_gemma3",
+    "default_cli_args": " --max_num_seq 5 --max_model_len 20000",
+    "environment_variables": "export VLLM_ATTENTION_BACKEND=FLASH_ATTN && export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True"
+    }
+)
 
 vllm_deepseek_r1_distill_qwen_engine071 = VllmEngine(**{
             **vllm_engine064.model_dump(),
             "engine_dockerfile_config": {"VERSION":"v0.7.1"},
-            "default_cli_args": "--max_num_seq 10 --enable-reasoning --reasoning-parser deepseek_r1 --max_model_len 16000 --disable-log-stats --chat-template emd/models/chat_templates/deepseek_r1_distill.jinja"
+            "default_cli_args": "--max_num_seq 256 --max_model_len 16000"
 })
 
 vllm_deepseek_r1_distill_llama_engine071 = vllm_deepseek_r1_distill_qwen_engine071
@@ -166,6 +174,7 @@ tgi_deepseek_r1_llama_70b_engine301 = TgiEngine(
         "model_files_modify_hook_kwargs":{"chat_template":"emd/models/chat_templates/deepseek_r1_distill.jinja"},
         "default_cli_args": " --max-total-tokens 16000 --max-concurrent-requests 10",
         # "environment_variables": "export VLLM_ATTENTION_BACKEND=FLASHINFER && export PYTORCH_CUDA_ALLOC_CONF=expandable_segments:True"
+        "environment_variables": "export PREFIX_CACHING=0"
 }
 )
 
@@ -188,7 +197,7 @@ llama_cpp_deepseek_r1_1d58_bit_engine_b9ab0a4 = LlamaCppEngine(
         "base_image_host":"public.ecr.aws",
         "use_public_ecr":True,
         "docker_login_region":"us-east-1",
-        "default_cli_args":" -c 6500  -np 5 --temp 0.6 -ngl 10000 --cache-type-k q4_0 --cont-batching --threads-http 5 --jinja --chat-template-file emd/models/chat_templates/deepseek_r1.jinja"
+        "default_cli_args":"--tensor-split 8,7,8,8,8,8,7,8  -ctk q4_0 --ctx-size 10240 --parallel 2 --batch-size 32 --threads 96 --prio 2 --temp 0.6 --top-p 0.95 --jinja --chat-template-file emd/models/chat_templates/deepseek_r1.jinja"
     }
 )
 
