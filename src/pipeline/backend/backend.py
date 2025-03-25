@@ -87,7 +87,7 @@ class OpenAICompitableProxyBackendBase(BackendBase):
         if self.custom_gpu_num is not None:
             return self.custom_gpu_num
         return get_gpu_num()
-    
+
     @property
     def cpu_num(self):
         return get_cpu_num()
