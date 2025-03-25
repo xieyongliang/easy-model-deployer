@@ -488,6 +488,46 @@ Model.register(
 
 Model.register(
     dict(
+        model_id = "deepseek-v3-0324-2bit_gguf",
+        supported_engines=[ktransformers_engine],
+        supported_instances=[
+            g5d12xlarge_instance,
+            g5d16xlarge_instance,
+            g5d24xlarge_instance,
+            g5d48xlarge_instance,
+            g6d12xlarge_instance,
+            g6d16xlarge_instance,
+            g6d24xlarge_instance,
+            g6d48xlarge_instance,
+            g6e8xlarge_instance,
+            g6e12xlarge_instance,
+            g6e16xlarge_instance,
+            g6e24xlarge_instance,
+            g6e48xlarge_instance,
+            local_instance
+        ],
+        supported_services=[
+            sagemaker_service,
+            sagemaker_async_service,
+            ecs_service,
+            local_service
+        ],
+        supported_frameworks=[
+            fastapi_framework
+        ],
+        allow_china_region=False,
+        need_prepare_model=False,
+        huggingface_model_id="MaziyarPanahi/DeepSeek-V3-0324-GGUF",
+        require_huggingface_token=False,
+        application_scenario="Agent, tool use, translation, summary",
+        description="The latest series of DeepSeek LLMs",
+        model_type=ModelType.LLM,
+        model_series=DEEPSEEK_REASONING_MODEL
+    )
+)
+
+Model.register(
+    dict(
         model_id = "deepseek-v3-UD-IQ1_M_ollama",
         supported_engines=[ollama_deepseek_r1_qwen2d5_1d5b_engine057],
         supported_instances=[
