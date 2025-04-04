@@ -383,10 +383,19 @@ comfyui_engine = ComfyuiEngine(**{
             "docker_login_region":"us-east-1",
 })
 
-ktransformers_engine = KtransformersEngine(**{
+ktransformers_r1_engine = KtransformersEngine(**{
             "engine_type":EngineType.KTRANFORMERS,
             "engine_cls":"ktransformers.ktransformers_backend.KTransformersBackend",
             "base_image_host":"nvcr.io",
             "use_public_ecr":False,
+            "default_cli_args": " --max_new_tokens 2048",
+})
+
+ktransformers_v3_engine = KtransformersEngine(**{
+            "engine_type":EngineType.KTRANFORMERS,
+            "engine_cls":"ktransformers.ktransformers_backend.KTransformersBackend",
+            "base_image_host":"nvcr.io",
+            "use_public_ecr":False,
+            "dockerfile_name":"Dockerfile_v3_0324",
             "default_cli_args": " --max_new_tokens 2048",
 })

@@ -398,7 +398,6 @@ class MoEGate(nn.Module):
         self.n_routed_experts = config.n_routed_experts
         self.routed_scaling_factor = config.routed_scaling_factor
         self.scoring_func = config.scoring_func
-        self.seq_aux = config.seq_aux
         self.topk_method = config.topk_method
         self.n_group = config.n_group
         self.topk_group = config.topk_group
@@ -455,7 +454,7 @@ class MoEGate(nn.Module):
                 )
                 .reshape(bsz * seq_len, -1)
             )  # [n, e]
-            tmp_scores = scores_for_choice.masked_fill(~score_mask.bool(), 0.0)  # [n, e]
+            tmp_scores = scores_for_choice.masked_fill(~score_mask.bool(), float("-inf"))  # [n, e]
             _, topk_idx = torch.topk(
                 tmp_scores, k=self.top_k, dim=-1, sorted=False
             )
